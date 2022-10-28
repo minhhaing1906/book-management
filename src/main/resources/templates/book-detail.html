@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Detail</title>
+</head>
+<body>
+
+  <form th:action="@{/save}" method="post" th:object="${book}">
+
+      <input type="hidden" th:field="${book.bookId}">
+
+        Tiêu đề: <input type="text" th:field="${book.title}">
+        <br>
+        Tác giả: <input type="text" th:field="${book.author}">
+        <br>
+        Mô tả về sách: <textarea rows="10" cols="50" th:field="${book.description}"></textarea>
+        <br>
+        Ngày phát hành: <input type="date" th:field="${book.releaseDate}">
+        <br>
+        Số trang: <input type="number" th:field="${book.pages}">
+        <br>
+        Thể loại:
+        <select th:field="${book.category}">
+            <option th:value="Novel">Novel</option>
+            <option th:value="Honor">Honor</option>
+            <option th:value="Sci-fi">Sci-fi</option>
+        </select>
+        <br>
+        <input type="submit" value="Save Book">
+  </form>
+</body>
+</html>
