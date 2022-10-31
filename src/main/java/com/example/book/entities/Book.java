@@ -36,15 +36,36 @@ public class Book {
     @Column(name = "pages")
     private int pages;
 
+    @Lob
+    @Column(name = "photo")
+    private String photo;
+
     public Book() {
     }
 
-    public Book(String title, String author, String description, String category, Date releaseDate, int pages) {
+//    public Book(String title, String author, String description, String category, Date releaseDate, int pages) {
+//        this.title = title;
+//        this.author = author;
+//        this.description = description;
+//        this.category = category;
+//        this.releaseDate = releaseDate;
+//        this.pages = pages;
+//    }
+
+    public Book(String title, String author, String description, String category, Date releaseDate, int pages, String photo) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.category = category;
         this.releaseDate = releaseDate;
         this.pages = pages;
+        this.photo = photo;
     }
+
+//    @Transient
+//    public String getPhotosImagePath() {
+//        if (photo == null)
+//            return null;
+//        return "/book-photos/" + bookId + "/" + photo;
+//    }
 }

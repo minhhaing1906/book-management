@@ -2,11 +2,15 @@ package com.example.book.controller;
 
 import com.example.book.entities.Book;
 import com.example.book.repository.BookRepository;
+import com.example.book.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -33,8 +37,16 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String saveBook(@ModelAttribute("book") Book book) {
-        bookRepo.save(book);
+//    public String saveBook(@ModelAttribute("book") Book book, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public String saveBook(@ModelAttribute("book") Book book) throws IOException {
+//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//        book.setPhoto(fileName);
+
+        Book savedBook = bookRepo.save(book);
+
+//        String uploadDir = "book-photos/" + savedBook.getBookId();
+
+//        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "redirect:/";
     }
 
