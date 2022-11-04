@@ -27,13 +27,13 @@ public class BookController {
     public String getBooks(Model model) {
         List<Book> all = bookService.findAll();
         model.addAttribute("all", all);
-        return "book-list";
+        return "book/book-list";
     }
 
     @GetMapping("/detail")
     public String displayBookDetail(Model model) {
         model.addAttribute("book", new Book());
-        return "book-detail";
+        return "book/book-detail";
     }
 
     @PostMapping("/save")
@@ -42,7 +42,7 @@ public class BookController {
 
         if (bindingResult.hasErrors()){
             System.out.println("----------------Hit error---------------------");
-            return "book-detail";
+            return "book/book-detail";
         }
 
         Book savedBook = bookService.save(book);
@@ -53,7 +53,7 @@ public class BookController {
     public String updateBook(Model model, @PathVariable int id) {
         Optional<Book> byId = bookService.findById(id);
         model.addAttribute("book", byId);
-        return "book-detail";
+        return "book/book-detail";
     }
 
     @GetMapping("/delete/{id}")

@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -33,7 +34,7 @@ public class SecurityController {
     }
 
     @PostMapping("/register/save")
-    public String saveUser(@Valid @ModelAttribute("userAccount") UserAccount user, BindingResult bindingResult) {
+    public String saveUser(@Valid @ModelAttribute("userAccount") UserAccount user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (accountService.checkUserName(user.getUserName()))
             bindingResult.addError(new FieldError("user", "userName", "username already exists, please choose another name"));
 
@@ -44,6 +45,8 @@ public class SecurityController {
             System.out.println("-----------------Hit error------------------");
             return "security/register";
         }
+
+        redirectAttributes.addFlashAttribute("message", "Success! Your registration is complete");
 
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
         accountService.save(user);
