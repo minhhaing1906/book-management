@@ -22,17 +22,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .usersByUsernameQuery("SELECT username, password, enabled FROM user_accounts WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username, role FROM user_accounts WHERE username = ?")
-                .dataSource(dataSource)
-                .passwordEncoder(bCryptEncoder);
+            auth.jdbcAuthentication()
+                    .usersByUsernameQuery("SELECT username, password, enabled FROM user_accounts WHERE username = ?")
+                    .authoritiesByUsernameQuery("SELECT username, role FROM user_accounts WHERE username = ?")
+                    .dataSource(dataSource)
+                    .passwordEncoder(bCryptEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/detail").hasRole("AUTHENTICATED")
+//                .antMatchers("/detail").hasRole("AUTHENTICATED")
+//                .antMatchers("/save").hasRole("AUTHENTICATED")
+//                .antMatchers("/view", "/view/**").hasRole("AUTHENTICATED")
+//                .antMatchers("/delete", "/delete/**").hasRole("AUTHENTICATED")
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin();
