@@ -64,6 +64,7 @@
 
                     <label for="photo">Image</label>
                     <input type="file" id="photo" onchange="getImage()" class="disabled-field" disabled>
+                    <span style="color: red" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></span>
                     <img id="image">
                     <img id="display-image" class="mt-sm-5" width="500px">
                 </div>

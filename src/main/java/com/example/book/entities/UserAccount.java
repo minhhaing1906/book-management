@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_accounts")
@@ -17,12 +20,18 @@ public class UserAccount {
     @Column(name="user_id")
     private int userId;
 
+    @NotBlank(message = "Must give an username")
+    @Size(min = 1, max = 255)
     @Column(name = "username")
     private String userName;
 
+    @NotBlank(message = "Must give an email")
+    @Email(message = "Enter a valid email address")
     @Column(name = "email")
     private String email;
 
+    @Size(min = 6, message = "Password must have at least 6 characters")
+    @NotBlank(message = "Must give a password")
     @Column(name = "password")
     private String password;
 

@@ -46,7 +46,8 @@ public class Book {
     @Column(name = "pages")
     private int pages;
 
-//    @Lob
+    @NotEmpty(message = "Must pick an image")
+    @Lob
     @Column(name = "photo")
     private String photo;
 

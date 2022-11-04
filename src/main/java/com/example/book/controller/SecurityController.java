@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class SecurityController {
@@ -29,7 +33,18 @@ public class SecurityController {
     }
 
     @PostMapping("/register/save")
-    public String saveUser(@ModelAttribute("userAccount") UserAccount user) {
+    public String saveUser(@Valid @ModelAttribute("userAccount") UserAccount user, BindingResult bindingResult) {
+        if (accountService.checkUserName(user.getUserName()))
+            bindingResult.addError(new FieldError("user", "userName", "username already exists, please choose another name"));
+
+        if(accountService.checkEmail(user.getEmail()))
+            bindingResult.addError(new FieldError("user", "email", "Email address already in use"));
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("-----------------Hit error------------------");
+            return "security/register";
+        }
+
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
         accountService.save(user);
 

@@ -41,7 +41,7 @@ public class BookController {
         System.out.println(book.getPhoto());
 
         if (bindingResult.hasErrors()){
-            System.out.println("----------------Hit error ---------------------");
+            System.out.println("----------------Hit error---------------------");
             return "book-detail";
         }
 
