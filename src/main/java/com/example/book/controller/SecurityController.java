@@ -1,7 +1,7 @@
 package com.example.book.controller;
 
 import com.example.book.entities.UserAccount;
-import com.example.book.repository.UserAccountRepository;
+import com.example.book.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SecurityController {
 
+    private final UserAccountService accountService;
+    private final BCryptPasswordEncoder bCryptEncoder;
+
     @Autowired
-    UserAccountRepository userAccountRepository;
-    @Autowired
-    BCryptPasswordEncoder bCryptEncoder;
+    public SecurityController(UserAccountService accountService, BCryptPasswordEncoder bCryptEncoder) {
+        this.accountService = accountService;
+        this.bCryptEncoder = bCryptEncoder;
+    }
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -27,7 +31,7 @@ public class SecurityController {
     @PostMapping("/register/save")
     public String saveUser(@ModelAttribute("userAccount") UserAccount user) {
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
-        userAccountRepository.save(user);
+        accountService.save(user);
 
         return "redirect:/login";
     }
