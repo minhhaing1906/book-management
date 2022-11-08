@@ -38,6 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/delete", "/delete/**").hasRole("AUTHENTICATED")
                 .antMatchers("/", "/**").permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .and()
+                .logout().permitAll();
     }
 }

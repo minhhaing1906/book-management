@@ -27,6 +27,11 @@ public class SecurityController {
         this.bCryptEncoder = bCryptEncoder;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "security/login";
+    }
+
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("userAccount", new UserAccount());
