@@ -58,6 +58,9 @@
                             </select>
                         </div>
                     </div>
+                    <button type="submit" id="edit-new" class="btn btn-primary">Edit</button>
+                    <button type="submit" id="send-data" style="display: none" class="btn btn-primary">Save</button>
+                    <button type="submit" id="add-book" style="display: none" class="btn btn-primary">Add</button>
                 </div>
                 <div class="col-sm-6 mt-3">
                     <input type="text" id="input" th:field="${book.photo}" style="display: none"/>
@@ -65,15 +68,10 @@
                     <label for="photo">Image</label>
                     <input type="file" id="photo" onchange="getImage()" class="disabled-field" disabled>
                     <span style="color: red" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></span>
-                    <img id="image">
+                    <img id="image" class="mt-sm-5" width="500px">
                     <img id="display-image" class="mt-sm-5" width="500px">
                 </div>
             </div>
-
-            <p id="demo"></p>
-            <button type="submit" id="edit-new" class="btn btn-primary">Edit</button>
-            <button type="submit" id="send-data" style="display: none" class="btn btn-primary">Save</button>
-            <button type="submit" id="add-book" style="display: none" class="btn btn-primary">Add</button>
         </form>
     </div>
 
@@ -126,8 +124,6 @@
         console.log(base64)
         document.getElementById("display-image").setAttribute("src", base64);
 
-
-        // đoạn này fix bug 2 ảnh mà meh
         const changeImage = document.getElementById("photo");
         changeImage.onclick = function (event) {
             document.getElementById("display-image").removeAttribute("src");
