@@ -66,7 +66,7 @@
                     <input type="text" id="input" th:field="${book.photo}" style="display: none"/>
 
                     <label for="photo">Image</label>
-                    <input type="file" id="photo" onchange="getImage()" class="disabled-field" disabled>
+                    <input type="file" id="photo" onchange="getImage()" class="disabled-field" disabled accept="image/*">
                     <span style="color: red" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></span>
                     <img id="image" class="mt-sm-5" width="500px">
                     <img id="display-image" class="mt-sm-5" width="500px">
@@ -83,11 +83,11 @@
             for(let i = 0; i < inputs.length; i++)
                 inputs[i].disabled = false;
 
-            document.getElementById("edit-new").innerHTML = "Save";
+            // document.getElementById("edit-new").innerHTML = "Save";
             // document.getElementById("edit-new").setAttribute("type", "submit");
             event.preventDefault();
-            document.getElementById("edit-new").style.display = "none";
 
+            document.getElementById("edit-new").style.display = "none";
             document.getElementById("send-data").style.display = "block";
         }
     </script>
@@ -114,7 +114,7 @@
                 inputs[i].disabled = false;
 
             document.getElementById("edit-new").style.display = "none";
-            document.getElementById("send-data").style.display = "none";
+            // document.getElementById("send-data").style.display = "none";
             document.getElementById("add-book").style.display = "block";
         }
     </script>
