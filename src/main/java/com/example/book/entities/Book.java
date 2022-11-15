@@ -63,11 +63,4 @@ public class Book {
         this.pages = pages;
         this.photo = photo;
     }
-
-//    @Transient
-//    public String getPhotosImagePath() {
-//        if (photo == null)
-//            return null;
-//        return "/book-photos/" + bookId + "/" + photo;
-//    }
 }
